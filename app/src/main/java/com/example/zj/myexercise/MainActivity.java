@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.example.zj.myexercise.util.DensityUtil;
-//    my exercise
+//    my exercise test
 public class MainActivity extends Activity {
 //    动态权限
     private static String[] PERMISSIONS_STORAGE = {
