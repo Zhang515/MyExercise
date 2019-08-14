@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
     private Button mBtnWebView;
     private Button mBtnAnimation;
     private Button mBtnDialogActivity;
+    private Button mBtnFragment;
 
 
     @Override
@@ -88,6 +89,10 @@ public class MainActivity extends Activity {
         mBtnDialogActivity=new MyButton(this,"DialogActivity",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
         mBtnDialogActivity.setLayoutParams(btnParams);
         rootLayout.addView(mBtnDialogActivity);
+
+        mBtnFragment=new MyButton(this,"Fragment",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
+        mBtnFragment.setLayoutParams(btnParams);
+        rootLayout.addView(mBtnFragment);
 
 
     }
@@ -140,6 +145,16 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        mBtnFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,FragmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void applyPermisson(){

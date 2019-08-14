@@ -9,11 +9,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.zj.myexercise.util.DensityUtil;
 
@@ -55,17 +58,23 @@ public class ListViewActivity extends Activity {
         lineView.setLayoutParams(lineParams);
         rootLayout.addView(lineView);
 
+        FrameLayout frameLayout=new FrameLayout(this);
+        FrameLayout.LayoutParams frameParams=new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        frameLayout.setLayoutParams(frameParams);
+        rootLayout.addView(frameLayout);
+
         listView=new ListView(this);
         List<Information> mData=new LinkedList<Information>();
-        mData.add(new Information("第一页","百度","https://www.baidu.com/"));
-        mData.add(new Information("第二页","搜狗","https://www.sogou.com/"));
+        mData.add(new Information("第1页","百度","https://www.baidu.com/"));
+        mData.add(new Information("第2页","搜狗","https://www.sogou.com/"));
         MyAdapter adapter1=new MyAdapter((LinkedList<Information>) mData,this);
         listView.setAdapter(adapter1);
-        rootLayout.addView(listView);
+        frameLayout.addView(listView);
 
         final EditText validLengthET=new EditText(this);
         LinearLayout.LayoutParams vcParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         validLengthET.setLayoutParams(vcParams);
+        validLengthET.setHint("请输入大于0的数字");
         rootLayout.addView(validLengthET);
 
         mBtnValidCode=new MyButton(this,"ValidCode",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
@@ -76,9 +85,14 @@ public class ListViewActivity extends Activity {
         mBtnValidCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ListViewActivity.this,ValidVodeActivity.class);
-                intent.putExtra("validLength",validLengthET.getText().toString());
-                startActivity(intent);
+                if (validLengthET.getText().toString().trim().isEmpty()){
+                    Toast.makeText(ListViewActivity.this,"请输入大于0的数字",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent=new Intent(ListViewActivity.this,ValidVodeActivity.class);
+                    intent.putExtra("validLength",validLengthET.getText().toString());
+                    startActivity(intent);
+                }
+
             }
         });
     }

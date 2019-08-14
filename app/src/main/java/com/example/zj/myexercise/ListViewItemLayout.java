@@ -16,12 +16,13 @@ public class ListViewItemLayout extends RelativeLayout {
 
         LayoutParams rootParams=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
         setLayoutParams(rootParams);
+        setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
 
         TextView leftTv=new TextView(context);
         int leftTVId = 10001;
         leftTv.setId(leftTVId);
         leftTv.setBackgroundColor(Color.LTGRAY);
-        RelativeLayout.LayoutParams leftParams=new RelativeLayout.LayoutParams(DensityUtil.dip2px(context,60),DensityUtil.dip2px(context,60));
+        RelativeLayout.LayoutParams leftParams=new RelativeLayout.LayoutParams(DensityUtil.dip2px(context,120),DensityUtil.dip2px(context,120));
         leftParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         leftTv.setLayoutParams(leftParams);
