@@ -10,18 +10,23 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.zj.myexercise.util.DensityUtil;
 //    my exercise test
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 //    动态权限
     private static String[] PERMISSIONS_STORAGE = {
 //            Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -40,6 +45,9 @@ public class MainActivity extends Activity {
     private Button mBtnAnimation;
     private Button mBtnDialogActivity;
     private Button mBtnFragment;
+    private Button mBtnDrawable;
+    private Button mBtnService;
+    private ScrollView scrollView;
 
 
     @Override
@@ -52,7 +60,7 @@ public class MainActivity extends Activity {
     }
 
     private void initView(){
-        ScrollView scrollView=new ScrollView(this);
+        scrollView=new ScrollView(this);
         scrollView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         setContentView(scrollView);
 
@@ -63,6 +71,21 @@ public class MainActivity extends Activity {
         rootParams.gravity= Gravity.CENTER_HORIZONTAL;
         rootLayout.setLayoutParams(rootParams);
         scrollView.addView(rootLayout);
+
+        TextView textView=new TextView(this);
+        WindowManager wm = (WindowManager) this.getSystemService(this.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;         // 屏幕宽度（像素）
+        int height = dm.heightPixels;       // 屏幕高度（像素）
+        textView.setText("宽度==="+width+"高度==="+height);
+        rootLayout.addView(textView);
+
+        EditText editText=new EditText(this);
+        LinearLayout.LayoutParams etParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        rootLayout.addView(editText,etParams);
+
+
 
         mBtnViewPager=new MyButton(this,"ViewPager",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
         LinearLayout.LayoutParams btnParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -94,6 +117,13 @@ public class MainActivity extends Activity {
         mBtnFragment.setLayoutParams(btnParams);
         rootLayout.addView(mBtnFragment);
 
+        mBtnDrawable=new MyButton(this,"Drawable",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
+        mBtnDrawable.setLayoutParams(btnParams);
+        rootLayout.addView(mBtnDrawable);
+
+        mBtnService=new MyButton(this,"Service",18,DensityUtil.dip2px(this,20), Color.rgb(135,206,250));
+        mBtnService.setLayoutParams(btnParams);
+        rootLayout.addView(mBtnService);
 
     }
 
@@ -154,6 +184,21 @@ public class MainActivity extends Activity {
             }
         });
 
+        mBtnDrawable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,DrawableActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mBtnService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,ServiceActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -175,4 +220,6 @@ public class MainActivity extends Activity {
 
         }
     }
+
+
 }

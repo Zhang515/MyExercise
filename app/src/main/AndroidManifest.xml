@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".TestService"/>
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".LayoutToggleActivity" />
         <activity android:name=".ListViewActivity" />
@@ -26,7 +27,9 @@
         <activity android:name=".AnimationActivity" />
         <activity android:name=".DialogActivity" />
         <activity android:name=".ValidVodeActivity" />
-        <activity android:name=".FragmentActivity"></activity>
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".DrawableActivity" />
+        <activity android:name=".ServiceActivity"></activity>
     </application>
 
 </manifest>

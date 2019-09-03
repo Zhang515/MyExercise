@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.zj.myexercise.util.DensityUtil;
 
@@ -24,11 +26,13 @@ public class AnimationActivity extends Activity {
     private Button mBtnPlay;
     private AnimationDrawable animationDrawable;
     private CountDownTimer runTimer;
+    private String testString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        testString=getIntent().getStringExtra("testString");
         initView();
 
         animationDrawable=new AnimationDrawable();
@@ -79,6 +83,10 @@ public class AnimationActivity extends Activity {
         btnParams.setMargins(0,DensityUtil.dip2px(this,20),0,0);
         mBtnPlay.setLayoutParams(btnParams);
         rootLayout.addView(mBtnPlay);
+
+        TextView textView=new TextView(this);
+        rootLayout.addView(textView);
+        textView.setText(TextUtils.isEmpty(testString)?"111":"222");
     }
 
     private Handler mhandler=new Handler(){
